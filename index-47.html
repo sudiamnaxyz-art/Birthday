@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Amina ❤</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff5d82">
+<link rel="icon" href="profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff6f8;
+    --grid:rgba(255,138,164,0.10);
+    --pink:#ff8fa8;
+    --pink-deep:#ff5d82;
+    --pink-pale:#ffe3ea;
+    --white:#ffffff;
+    --text:#5a3a44;
+    --muted:#a9808c;
+    --line:rgba(255,138,164,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      var(--bg);
+    background-size:34px 34px, 34px 34px, auto;
+    color:var(--text);
+    font-family:'Hind Siliguri', sans-serif;
+    font-size:18px;
+    line-height:1.75;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+
+  /* ---------- decorative bunting ---------- */
+  .bunting{position:fixed; top:0; z-index:3; display:flex; pointer-events:none;}
+  .bunting.left{left:0;}
+  .bunting.right{right:0; transform:scaleX(-1);}
+  .flag{
+    width:22px; height:28px; margin:0 2px;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    animation:flagSway 2.4s ease-in-out infinite;
+  }
+  @keyframes flagSway{0%,100%{transform:rotate(-4deg);} 50%{transform:rotate(4deg);}}
+
+  /* ---------- decorative blobs ---------- */
+  .blob{
+    position:fixed; z-index:0; pointer-events:none;
+    border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+    opacity:0.55;
+    animation:blobMorph 8s ease-in-out infinite;
+  }
+  .blob.b1{width:180px; height:180px; right:-60px; bottom:-60px; background:linear-gradient(135deg,var(--pink),var(--pink-deep));}
+  .blob.b2{width:130px; height:130px; left:-50px; top:-30px; background:linear-gradient(135deg,var(--pink-pale),var(--pink));}
+  @keyframes blobMorph{
+    0%,100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}
+    50%{border-radius:40% 60% 70% 30% / 40% 70% 30% 60%;}
+  }
+
+  /* ---------- floating balloons ---------- */
+  .balloon{position:fixed; z-index:0; pointer-events:none; font-size:34px; opacity:0.85; animation:balloonFloat linear infinite;}
+  @keyframes balloonFloat{
+    0%{transform:translateY(10vh) translateX(0) rotate(-4deg);}
+    50%{transform:translateY(-55vh) translateX(14px) rotate(4deg);}
+    100%{transform:translateY(-120vh) translateX(-6px) rotate(-4deg);}
+  }
+
+  #vignette{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    background:radial-gradient(ellipse at center, transparent 55%, rgba(255,138,164,0.08) 100%);
+  }
+
+  /* ---------- lock screen ---------- */
+  #lockScreen{
+    position:fixed; inset:0; z-index:50;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:30px;
+    background:linear-gradient(180deg,#fff0f4,#ffe3ea);
+  }
+  #lockScreen .bubble-title{font-size:clamp(34px,9vw,52px); margin-bottom:22px;}
+  .lock-card{
+    background:var(--white); border-radius:28px; padding:34px 26px;
+    box-shadow:0 20px 50px rgba(255,93,130,0.18);
+    border:2px solid var(--pink-pale);
+    animation:popIn .6s ease;
+  }
+  .date-inputs{display:flex; gap:10px; justify-content:center; margin:8px 0 22px; flex-wrap:wrap;}
+  .date-inputs input{
+    background:var(--pink-pale); color:var(--text);
+    border:2px solid var(--pink); padding:11px 10px;
+    font-family:'Hind Siliguri', sans-serif; font-size:16px; font-weight:600;
+    border-radius:12px; width:78px; text-align:center;
+  }
+  .date-inputs input::placeholder{color:var(--muted);}
+  .error-msg{color:var(--pink-deep); font-size:14.5px; min-height:20px; margin-top:12px; font-weight:600;}
+  .lock-timer{color:var(--pink-deep); font-size:15px; margin-top:8px; font-family:'Baloo Da 2',sans-serif; font-weight:600;}
+  .shake{animation:shakeX .4s;}
+  @keyframes shakeX{
+    0%,100%{transform:translateX(0);} 25%{transform:translateX(-8px);}
+    75%{transform:translateX(8px);}
+  }
+  @keyframes popIn{
+    0%{transform:scale(0.85); opacity:0;} 100%{transform:scale(1); opacity:1;}
+  }
+
+  /* ---------- buttons ---------- */
+  .btn, #nextBtn{
+    background:linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color:#fff; border:none;
+    font-family:'Baloo Da 2',sans-serif; font-weight:700; letter-spacing:0.5px; font-size:15px;
+    padding:13px 34px; border-radius:30px; cursor:pointer;
+    box-shadow:0 8px 22px rgba(255,93,130,0.35);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn:hover, #nextBtn:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 12px 28px rgba(255,93,130,0.45);}
+  .btn:disabled{opacity:0.4; cursor:not-allowed; transform:none;}
+  .btn{display:inline-block;}
+
+  #nextBtn{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:15;
+    padding:12px 30px; font-size:14px;
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-5px);}}
+
+  .ornament{text-align:center; color:var(--pink); font-size:20px; letter-spacing:14px; margin:18px auto; opacity:0.9;}
+
+  .page{
+    display:none;
+    min-height:100vh;
+    padding:60px 20px 120px;
+    position:relative; z-index:1;
+    max-width:760px; margin:0 auto;
+    animation:bounceIn .7s ease;
+  }
+  .page.active{display:block;}
+  @keyframes bounceIn{
+    0%{opacity:0; transform:translateY(30px) scale(0.96);}
+    60%{opacity:1; transform:translateY(-6px) scale(1.01);}
+    100%{opacity:1; transform:translateY(0) scale(1);}
+  }
+
+  h1,h2,h3{font-family:'Baloo Da 2', sans-serif; font-weight:700; color:var(--pink-deep); margin:0 0 10px;}
+  .bubble-title{
+    font-family:'Fredoka', sans-serif; font-weight:700; color:#fff;
+    -webkit-text-stroke:2.5px var(--pink-deep);
+    text-shadow:3px 3px 0 var(--pink-deep), 0 6px 18px rgba(255,93,130,0.35);
+    line-height:1.15;
+  }
+  .center{text-align:center;}
+  .muted{color:var(--muted);}
+  .eyebrow{letter-spacing:4px; text-transform:uppercase; font-size:12.5px; color:var(--pink); font-weight:700; margin-bottom:12px;}
+  hr.gold{
+    border:none; height:3px; border-radius:3px;
+    background:linear-gradient(90deg, transparent, var(--pink), transparent);
+    margin:22px auto; width:55%;
+  }
+
+  /* ---------- HOME ---------- */
+  #home.active{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:100vh; padding-top:60px;}
+  #home .bubble-title{font-size:clamp(46px,12vw,86px);}
+  #home .name-badge{
+    display:inline-block; margin-top:14px; background:var(--pink-pale); color:var(--pink-deep);
+    font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:26px;
+    padding:8px 26px; border-radius:40px; border:2px solid var(--pink);
+  }
+  #home .sub{font-size:19px; color:var(--muted); max-width:420px; margin:20px auto 8px;}
+  .party-hat{font-size:38px; display:inline-block; animation:wiggle 2s ease-in-out infinite;}
+  @keyframes wiggle{0%,100%{transform:rotate(-8deg);} 50%{transform:rotate(8deg);}}
+
+  /* ---------- PROFILE ---------- */
+  .profile-wrap{position:relative; width:190px; height:190px; margin:30px auto 0;}
+  .profile-frame{
+    width:100%; height:100%; border-radius:50%; overflow:hidden;
+    border:5px solid var(--white); box-shadow:0 14px 34px rgba(255,93,130,0.3);
+    background:var(--pink-pale);
+  }
+  .profile-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .profile-frame .placeholder{
+    display:flex; align-items:center; justify-content:center; height:100%;
+    color:#c98a9a; font-family:'Baloo Da 2',sans-serif; font-size:13px; text-align:center; padding:10px;
+  }
+  .profile-balloon{position:absolute; font-size:44px; animation:balloonBob 2.6s ease-in-out infinite;}
+  .profile-balloon.left{left:-38px; top:-6px;}
+  .profile-balloon.right{right:-40px; bottom:6px; animation-delay:0.6s;}
+  @keyframes balloonBob{0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-9px) rotate(3deg);}}
+  .dear-badge{
+    display:inline-block; margin-top:16px; background:linear-gradient(135deg,var(--pink),var(--pink-deep));
+    color:#fff; font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:18px;
+    padding:8px 24px; border-radius:30px; box-shadow:0 8px 20px rgba(255,93,130,0.3);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; margin-top:36px; padding-left:26px; border-left:3px dashed var(--pink);}
+  .t-item{position:relative; margin-bottom:38px; padding-left:18px;}
+  .t-item::before{
+    content:"💗"; position:absolute; left:-40px; top:-2px; font-size:18px;
+  }
+  .t-date{font-family:'Baloo Da 2',sans-serif; color:var(--pink-deep); font-size:14px; letter-spacing:0.5px; font-weight:700;}
+  .t-title{font-size:22px; margin:4px 0 6px; color:var(--text); font-weight:700; font-family:'Baloo Da 2',sans-serif;}
+
+  /* ---------- LETTER ---------- */
+  .letter-card{
+    background:var(--white);
+    border:2px solid var(--pink-pale);
+    border-radius:26px;
+    padding:36px 28px;
+    position:relative;
+    box-shadow:0 20px 50px rgba(255,93,130,0.15);
+  }
+  .letter-card::before{content:"💌"; position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-size:34px;}
+  .letter-body{white-space:pre-line; font-size:19px;}
+  .sign{text-align:right; margin-top:22px; font-family:'Baloo Da 2',sans-serif; font-weight:700; color:var(--pink-deep); font-size:22px;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:30px;}
+  .g-item{position:relative;}
+  .g-item.wide{grid-column:span 2;}
+  .g-frame{
+    border:7px solid var(--white); border-radius:24px; padding:0; background:var(--pink-pale);
+    aspect-ratio:1/1; overflow:hidden; position:relative;
+    box-shadow:0 14px 30px rgba(255,93,130,0.25);
+  }
+  .g-frame img{width:100%; height:100%; object-fit:cover; display:block; transition:.4s;}
+  .g-frame:hover img{transform:scale(1.06);}
+  .g-frame.wide{aspect-ratio:2/1;}
+  .g-frame.f2{border-color:#ffd6e0; border-radius:40px; transform:rotate(-2deg);}
+  .g-frame.f3{border:7px solid #f0c27b; border-radius:18px; transform:rotate(2deg);}
+  .g-frame.f4{border:10px solid var(--white); border-bottom-width:30px; border-radius:6px; box-shadow:0 16px 28px rgba(0,0,0,0.18);}
+  .g-frame.f5{border:6px dashed var(--pink-deep); border-radius:30px;}
+  .g-frame.f6{border-radius:50% 50% 50% 6px; border-color:#ffb6c8; transform:rotate(-1.5deg);}
+  .g-frame.f7{border-radius:6px 40px 6px 40px; border-color:#c98a9a; transform:rotate(1.5deg);}
+  .g-deco{position:absolute; font-size:30px; pointer-events:none; z-index:3; filter:drop-shadow(0 3px 4px rgba(0,0,0,.15));}
+
+
+  /* ---------- REASONS ---------- */
+  .reasons{margin-top:26px; display:flex; flex-direction:column; gap:14px;}
+  .reason{
+    background:var(--white); border-left:5px solid var(--pink); border-radius:16px;
+    padding:14px 18px; font-size:18.5px;
+    box-shadow:0 6px 18px rgba(255,93,130,0.1);
+  }
+  .reason b{color:var(--pink-deep); font-family:'Baloo Da 2',sans-serif; font-weight:700;}
+
+  /* ---------- SURPRISE ---------- */
+  #surprise{text-align:center;}
+  .seal{
+    width:130px; height:130px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #ffb6c9, var(--pink-deep) 75%);
+    margin:44px auto 20px; display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo Da 2',sans-serif; font-weight:700; font-size:15px; color:#fff; letter-spacing:0.5px;
+    cursor:pointer; box-shadow:0 0 40px rgba(255,93,130,0.4);
+    transition:transform .3s;
+    border:none;
+    animation:pulseGlow 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseGlow{
+    0%,100%{box-shadow:0 0 28px rgba(255,93,130,0.35);}
+    50%{box-shadow:0 0 52px rgba(255,93,130,0.6);}
+  }
+  .seal:hover{transform:scale(1.07);}
+  .reveal{display:none; margin-top:20px;}
+  .reveal.show{display:block; animation:bounceIn 1s ease;}
+  .reveal .bubble-title{font-size:clamp(32px,8vw,54px);}
+  #confetti-canvas{position:fixed; inset:0; pointer-events:none; z-index:20;}
+
+  footer{text-align:center; padding:30px; color:var(--muted); font-size:13px; letter-spacing:1px;}
+
+  @media(max-width:480px){
+    .gallery{grid-template-columns:1fr 1fr;}
+    .flag{width:16px; height:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="vignette"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="bunting left" id="buntingLeft"></div>
+<div class="bunting right" id="buntingRight"></div>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div id="balloons"></div>
+
+<!-- ============ LOCK SCREEN ============ -->
+<div id="lockScreen">
+  <div class="bubble-title">Unlock it, Amina</div>
+  <p style="text-align:center; color:var(--pink-deep); font-family:'Baloo Da 2',sans-serif; font-size:15px; margin:-10px 0 18px; opacity:.85;">Select the date when started our relationship?</p>
+  <div class="lock-card">
+    <!-- EDIT: profile.jpg নামে তোমার/তার ছবি photos ফোল্ডারে রাখলে এখানেও দেখাবে -->
+    <div class="profile-wrap" style="width:120px;height:120px;margin:0 auto 20px;">
+      <span class="profile-balloon left" style="font-size:30px; left:-24px; top:-4px;">🎈</span>
+      <div class="profile-frame">
+        <img src="profile.jpg" alt="প্রোফাইল ছবি" onerror="this.outerHTML='<div class=\'placeholder\' style=\'font-size:11px;\'>profile.jpg</div>'">
+      </div>
+      <span class="profile-balloon right" style="font-size:30px; right:-26px; bottom:2px;">🎈</span>
+    </div>
+    <div class="date-inputs">
+      <input type="number" id="lockDay" placeholder="দিন" inputmode="numeric" min="1" max="31">
+      <input type="number" id="lockMonth" placeholder="মাস" inputmode="numeric" min="1" max="12">
+      <input type="number" id="lockYear" placeholder="বছর" inputmode="numeric" min="2000" max="2035">
+    </div>
+    <button class="btn" id="unlockBtn" onclick="tryUnlock()">Click Here 🔓</button>
+    <p class="error-msg" id="lockError"></p>
+    <p class="lock-timer" id="lockTimer"></p>
+  </div>
+</div>
+
+<!-- ============ CAMERA VERIFICATION MODAL ============ -->
+<div id="cameraModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:white; border-radius:24px; padding:24px; max-width:500px; width:90%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <h2 style="font-family:'Baloo Da 2',sans-serif; color:#ff5d82; font-size:28px; margin:0 0 16px;">Are you a Robot Amina 😁</h2>
+    <p style="font-family:'Baloo Da 2',sans-serif; color:#666; margin:0 0 20px; font-size:16px;">Verifying...</p>
+    <div id="verificationBar" style="width:100%; height:8px; background:#eee; border-radius:4px; overflow:hidden; margin:20px 0;">
+      <div id="verificationProgress" style="width:0%; height:100%; background:#ff5d82; transition:width 0.1s linear;"></div>
+    </div>
+    <p id="verificationText" style="font-family:'Baloo Da 2',sans-serif; color:#999; font-size:14px; margin:0;">Starting verification...</p>
+    <button onclick="completedVerification()" id="verificationDoneBtn" style="background:#ff5d82; color:white; border:none; padding:12px 24px; border-radius:20px; font-size:16px; font-family:'Baloo Da 2',sans-serif; cursor:pointer; margin-top:16px; display:none;">Done</button>
+    <button onclick="cancelVerification()" id="verificationCancelBtn" style="background:#ccc; color:#333; border:none; padding:12px 24px; border-radius:20px; font-size:16px; font-family:'Baloo Da 2',sans-serif; cursor:pointer; margin-top:16px;">Cancel</button>
+  </div>
+</div>
+
+<style>
+  #cameraModal.show { display: flex !important; }
+</style>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div id="mainContent" style="display:none;">
+
+<!-- ============ HOME ============ -->
+<section id="home" class="page active">
+  <div class="party-hat">🎉</div>
+  <div class="bubble-title">Happy Birthday</div>
+  <div class="name-badge">আমিনা আক্তার</div>
+  <p class="sub">HAPPY BIRTHDAY suna bou amar 🕯️🥳. Allahy tumare nek hayat dan korokka , ameen 😊. DUDU , I love you 💞❣️.<br>Uummmmmmmmmmmahh 💋💋💋🫂 🫂 .</p>
+
+  <!-- EDIT: profile.jpg নামে তোমার/তার একটা ছবি photos ফোল্ডারে রাখো, এখানে বৃত্তাকার হয়ে দেখাবে -->
+  <div class="profile-wrap">
+    <span class="profile-balloon left">🎈</span>
+    <div class="profile-frame">
+      <img src="profile.jpg" alt="প্রোফাইল ছবি" onerror="this.outerHTML='<div class=\'placeholder\'>profile.jpg যোগ করো</div>'">
+    </div>
+    <span class="profile-balloon right">🎈</span>
+  </div>
+  <div class="dear-badge">Dear আমিনা 💗</div>
+</section>
+
+<!-- ============ STORY / TIMELINE ============ -->
+<section id="story" class="page">
+  <div class="eyebrow center">Our Journey</div>
+  <h1 class="center">আমাদের গল্প</h1>
+  <hr class="gold">
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-date">১১ জুলাই, ২০২২</div>
+      <div class="t-title">যেখান থেকে সব শুরু</div>
+      <p class="muted">amra sobe ludu kelaiyar , ar ami sob somoy icha koriyau tumar kase taktam 🤭. Jani na tumi icha kori edin tumar hat amar hato lagaislay ni ☺️. But ami mono korsi tumi icha koriya lagaiso 🤭. Jano edinkur hat dora amar kase sob somoyu special takbo karon er bad taki jotobaru hat dorsi ami E feelings ar paisi na 😫♥️. Er age ami bujtamu na keuror mayay porata kila 🤭💋. Tumare to koilam pore ami jet sutu abbur loge dhakat jai et rastat tumare loiya koto kolpona korte korte gesi 🤭. Hino giya hotel o abbu gumaira.. amar toh gum lage na , kali tumi aiou amar matat ☺️🫂. Bettomij beti 🤭🫂</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">এক মুহূর্ত</div>
+      <div class="t-title">প্রথম জড়িয়ে ধরা</div>
+      <p class="muted">koydin pore to mat bondo oigelo amrar 🥹. But joto din gese tumare loiya kolponar poridi aro barse ☺️. First a hat dora sara ar kunta kolpona kortam fartam na 🤭. Pore 22 or December hamai gese ola somoy taki ami notun kori kolpona kora suru korlam tumare hug koriyar 🫣. Pore, somboboto 27 December 2022, ami nana bari aislam biday neuat ar et tumitain o aslay nana bari. Ino jauar agor din o ami sinta korsi tumare hug kormu 🫣. Pore toh tumare mamanir room o niya hug korililam 🙈. Jodio matro koyek second hug korsi but first hug hishabe ikta amar kase khub besi special ☺️♥️🫂, ummmmmmmahh 💋💋</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">এক মুহূর্ত</div>
+      <div class="t-title">প্রথম চুমু</div>
+      <p class="muted">first kundin kiss dislam amar mono nai fura ,but amar kase mono oy nana bari tumi hutno aslay sokale ar ami giya maya disi 🙈. Oktau amar kase ekhon o first mono oy . Jesata okk edinkur mayatao amar kase khub special karon tumi abo gum o roiso . Tumar muko gumor sap fura roise ar ami maya disi 🙈</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">আজ</div>
+      <p class="muted">amader somporkota sadaron 10 ta somporkor lakan nay . Amra koto ta fari diyao ekhon o ek manoshikota niya asi oktau , shukriyah. Amrar somporko sudu amrar __ onek kisui bodlise but tumar proti bishash ekhon o ager motoi ase. 😊♥️💋</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOVE LETTER ============ -->
+<section id="letter" class="page">
+  <div class="eyebrow center">A Letter For You</div>
+  <h1 class="center">প্রিয়তমা,</h1>
+  <hr class="gold">
+  <div class="letter-card">
+    <div class="letter-body">Priyo Amina,
+
+Assalamualaikum. Asha kori balo aso. Amio balo asi😊.
+
+Happy Birthday 🎉🎈 my dear *suna , moyna , bulbuli , jaan....☺️*. Dua kori Allah tumay sobsomoy susto rakhok. Hmm , dinta amar kase special karon , ajker ei dine amar bou duniyat aisoin 🤭.
+
+Kene tumi special: amar oto osustotar maje jokhon ami kuno kano santi faiyar na et tumar loge matle amar santi lagto 🥹💋.
+
+Sunaa, tumi to jano ami caption ita lektam pari na 🥳🫠. Ar pari na nay tumare loiya caption kitau ba lekhtam . Tumare caption o bujani jaito na , tumi oilay er takio besi 🫠💋.
+
+Aij tumar jibonor arekta bosor sesh oilo. Allahr kase shukriyah janau. Ar dua koro Nek hayat dita 🫠. Nofol namaz poriya tumar sob kota Allahre kou 🫠.
+
+Aij aio matimu .
+
+Ar Gift 🎁. Gift hishabe afajoto diyar ekta, poror page o faibay . Ar deka oile amneu faibay 🤭.
+
+Ar besi lamba koriyar na , dua kori sob somoy hashi kushi tako, susto tako ,amar oiya tako 🫠. Aj ar noy .</div>
+    <div class="sign">ইতি,<br>তোমার Bulabu.</div>
+  </div>
+</section>
+
+<!-- ============ JUST FOR YOU ============ -->
+<section id="justforyou" class="page">
+  <div class="eyebrow center">A Little Extra</div>
+  <h1 class="center">just for you</h1>
+  <hr class="gold">
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery" class="page">
+  <div class="eyebrow center">Our Memories</div>
+  <h1 class="center">গ্যালারি</h1>
+  <hr class="gold">
+  <!-- EDIT: photo1.jpg, photo2.jpg ইত্যাদি নামে ছবি এই html ফাইলের পাশে রাখো (একই ফোল্ডারে) -->
+  <div class="gallery">
+    <div class="g-item wide">
+      <span class="g-deco" style="top:-14px; left:-10px;">🌸</span>
+      <span class="g-deco" style="bottom:-14px; right:-10px;">🎈</span>
+      <div class="g-frame wide"><img src="photo1.jpg" alt="আমাদের ছবি ১" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:14px;\'>photo1.jpg যোগ করো</div>'"></div>
+    </div>
+    <div class="g-item">
+      <span class="g-deco" style="top:-16px; right:-12px;">🎀</span>
+      <div class="g-frame f2"><img src="photo2.jpg" alt="আমাদের ছবি ২" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo2.jpg</div>'"></div>
+    </div>
+    <div class="g-item">
+      <span class="g-deco" style="bottom:-14px; left:-12px;">🌺</span>
+      <div class="g-frame f3"><img src="photo3.jpg" alt="আমাদের ছবি ৩" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo3.jpg</div>'"></div>
+    </div>
+    <div class="g-item">
+      <span class="g-deco" style="top:-16px; left:-10px;">🎈</span>
+      <div class="g-frame f4"><img src="photo4.jpg" alt="আমাদের ছবি ৪" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo4.jpg</div>'"></div>
+    </div>
+    <div class="g-item">
+      <span class="g-deco" style="bottom:-14px; right:-10px;">🌷</span>
+      <div class="g-frame f5"><img src="photo5.jpg" alt="আমাদের ছবি ৫" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo5.jpg</div>'"></div>
+    </div>
+    <div class="g-item">
+      <span class="g-deco" style="top:-14px; right:-12px;">🎈</span>
+      <div class="g-frame f6"><img src="photo6.jpg" alt="আমাদের ছবি ৬" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo6.jpg</div>'"></div>
+    </div>
+    <div class="g-item wide">
+      <span class="g-deco" style="top:-16px; left:20px;">🌸</span>
+      <span class="g-deco" style="bottom:-16px; right:20px;">🌸</span>
+      <div class="g-frame f7 wide"><img src="photo7.jpg" alt="আমাদের ছবি ৭" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#c98a9a;font-family:Baloo Da 2, sans-serif;font-size:13px;text-align:center;padding:6px;\'>photo7.jpg</div>'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REASONS ============ -->
+<section id="reasons" class="page">
+  <div class="eyebrow center">Why I Love You</div>
+  <h1 class="center">কিছু কারণ</h1>
+  <hr class="gold">
+  <div class="reasons">
+    <div class="reason"><b>০১.</b> তুমিই একমাত্র মানুষ, যাকে আমি প্রথম আর শেষবারের মতো ভালোবেসেছি।</div>
+    <div class="reason"><b>০২.</b> তুমিই এমন মানুষ, যে আমার এত অসুস্থতার সময়ও আমার পাশে ছিলে।</div>
+    <div class="reason"><b>০৩.</b> তুমি ঠিক যেমন, আমি তেমনটাই তোমাকে ভালোবাসি।</div>
+    <div class="reason"><b>০৪.</b> তুমিই আমার একমাত্র প্রিয় মানুষ।</div>
+    <div class="reason"><b>০৫.</b> সব শেষে কিছু কারণ থাকে, যা কাউকে বোঝানো যায় না, বা কোনো কারণ ছাড়াই আমি তোমাকে ভালোবাসি। 🤗</div>
+  </div>
+</section>
+
+<!-- ============ SURPRISE ============ -->
+<section id="surprise" class="page">
+  <div class="eyebrow center">One Last Thing</div>
+  <h1 class="center">সারপ্রাইজ 🎁</h1>
+  <hr class="gold">
+  <div id="balloonContainer" style="padding:20px;">
+    <div id="balloonFrameContainer" style="display:grid; grid-template-columns:1fr 1fr; gap:40px; padding:30px; max-width:1200px; margin:0 auto;">
+      <!-- Frames will be generated here by JavaScript -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .balloon-frame-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+  }
+  
+  .frame-circle {
+    width: 180px;
+    height: 180px;
+    border: 7px solid #ff5d82;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffe5ed 0%, #ffcce0 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(255, 93, 130, 0.3);
+    margin: 0 auto;
+  }
+  
+  .frame-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .balloon {
+    position: absolute;
+    cursor: pointer;
+    font-size: 45px;
+    user-select: none;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  
+  .balloon:active {
+    transform: scale(0.95);
+  }
+  
+  .balloon.popping {
+    animation: popBalloon 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  
+  .frame-circle.tilting {
+    animation: frameTilt 0.4s ease-out;
+  }
+  
+  @keyframes popBalloon {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    70% {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0) translateY(40px);
+    }
+  }
+  
+  @keyframes frameTilt {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(-3deg); }
+    60% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .pop-particle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+    z-index: 999;
+  }
+  
+  @keyframes fallParticle {
+    to {
+      transform: translateY(300px) rotateZ(720deg);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  function initBalloonFrames() {
+    const container = document.getElementById('balloonFrameContainer');
+    if (!container) return;
+    
+    const balloonPositions = [
+      { top: '-25px', left: '50%', transform: 'translateX(-50%)', balloon: '🎈' },
+      { top: '10px', right: '-15px', balloon: '🎀' },
+      { bottom: '-25px', left: '50%', transform: 'translateX(-50%)', balloon: '🎈' },
+      { top: '10px', left: '-15px', balloon: '🎀' }
+    ];
+    
+    for (let i = 0; i < 20; i++) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'balloon-frame-wrapper';
+      
+      const circle = document.createElement('div');
+      circle.className = 'frame-circle';
+      circle.innerHTML = `<img src="photo${i+1 <= 7 ? i+1 : 1}.jpg" alt="Photo ${i+1}" style="display:block;" onerror="this.style.display='none'">
+      <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, #ffb3d9 0%, #ff85b4 100%); display:flex; align-items:center; justify-content:center; color:white; font-size:14px; text-align:center; padding:10px; font-family:'Baloo Da 2', sans-serif;">Photo ${i+1}</div>`;
+      wrapper.appendChild(circle);
+      
+      balloonPositions.forEach((pos, idx) => {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.textContent = pos.balloon;
+        balloon.style.top = pos.top || 'auto';
+        balloon.style.left = pos.left || 'auto';
+        balloon.style.right = pos.right || 'auto';
+        balloon.style.bottom = pos.bottom || 'auto';
+        balloon.style.transform = pos.transform || 'none';
+        
+        balloon.onclick = (e) => {
+          e.stopPropagation();
+          popBalloon(balloon, circle);
+        };
+        
+        wrapper.appendChild(balloon);
+      });
+      
+      container.appendChild(wrapper);
+    }
+  }
+  
+  function popBalloon(balloonEl, frameEl) {
+    if (balloonEl.classList.contains('popping')) return;
+    
+    balloonEl.classList.add('popping');
+    frameEl.classList.add('tilting');
+    
+    const particleEmojis = ['💥', '✨', '🎉', '💖'];
+    const rect = balloonEl.getBoundingClientRect();
+    
+    for (let i = 0; i < 3; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'pop-particle';
+      particle.textContent = particleEmojis[Math.floor(Math.random() * particleEmojis.length)];
+      particle.style.left = (rect.left + 20) + 'px';
+      particle.style.top = (rect.top + 20) + 'px';
+      document.body.appendChild(particle);
+      
+      particle.style.animation = `fallParticle ${0.8 + Math.random() * 0.5}s ease-out forwards`;
+      
+      setTimeout(() => particle.remove(), 1500);
+    }
+    
+    setTimeout(() => {
+      balloonEl.remove();
+      frameEl.classList.remove('tilting');
+    }, 500);
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBalloonFrames);
+  } else {
+    initBalloonFrames();
+  }
+</script>
+
+</div><!-- /mainContent -->
+
+<button id="nextBtn" onclick="nextPage()">next ➜</button>
+
+<footer>made with ❤ — just for you</footer>
+
+<script>
+  // ---------- casual protection: block right-click & devtools shortcuts ----------
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    const k = e.key ? e.key.toUpperCase() : '';
+    if(
+      k === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (k==='I' || k==='J' || k==='C')) ||
+      (e.ctrlKey && k==='U')
+    ){
+      e.preventDefault();
+    }
+  });
+
+  // ---------- decorative bunting flags ----------
+  const flagColors = ['#ff8fa8','#ffb6c9','#ff5d82','#ffd1dc'];
+  ['buntingLeft','buntingRight'].forEach(id=>{
+    const wrap = document.getElementById(id);
+    for(let i=0;i<7;i++){
+      const f = document.createElement('div');
+      f.className='flag';
+      f.style.background = flagColors[i % flagColors.length];
+      f.style.animationDelay = (i*0.15)+'s';
+      wrap.appendChild(f);
+    }
+  });
+
+  // ---------- floating balloons ----------
+  const balloonWrap = document.getElementById('balloons');
+  const balloonEmojis = ['🎈','🎈','🎈'];
+  for(let i=0;i<9;i++){
+    const b = document.createElement('div');
+    b.className='balloon';
+    b.textContent = balloonEmojis[i % balloonEmojis.length];
+    b.style.left = (5 + Math.random()*88)+'vw';
+    b.style.fontSize = (46 + Math.random()*30)+'px';
+    b.style.animationDuration = (14+Math.random()*10)+'s';
+    b.style.animationDelay = (Math.random()*10)+'s';
+    balloonWrap.appendChild(b);
+  }
+
+  // ---------- lock screen setup ----------
+  // এখানে সরাসরি তারিখ লেখা নেই — এটা এনক্রিপ্ট (SHA-256 hash) করা আছে, তাই কেউ পেজ সোর্স দেখলেও তারিখটা পড়তে পারবে না।
+  const CORRECT_HASH = 'b46e7c051ab0d0fe8e28c805c8dca72e5544ae15e15e1adbcd84ca8cd5ec479c';
+
+  async function sha256(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  const MAX_ATTEMPTS = 5;
+  const LOCKOUT_MS = 5 * 60 * 1000; // 5 minutes
+  let wrongAttempts = 0;
+  let lockoutTimer = null;
+
+  const daySel = document.getElementById('lockDay');
+  const monthSel = document.getElementById('lockMonth');
+  const yearSel = document.getElementById('lockYear');
+  const unlockBtn = document.getElementById('unlockBtn');
+  const lockErrorEl = document.getElementById('lockError');
+  const lockTimerEl = document.getElementById('lockTimer');
+
+  function setLockControlsEnabled(enabled){
+    daySel.disabled = !enabled;
+    monthSel.disabled = !enabled;
+    yearSel.disabled = !enabled;
+    unlockBtn.disabled = !enabled;
+  }
+
+  function startLockout(){
+    setLockControlsEnabled(false);
+    lockErrorEl.textContent = 'অনেকবার ভুল হয়ে গেছে গো... একটু বিরতি নাও।';
+    let remaining = LOCKOUT_MS;
+    updateTimerText(remaining);
+    lockoutTimer = setInterval(()=>{
+      remaining -= 1000;
+      if(remaining <= 0){
+        clearInterval(lockoutTimer);
+        wrongAttempts = 0;
+        lockTimerEl.textContent = '';
+        lockErrorEl.textContent = '';
+        setLockControlsEnabled(true);
+      } else {
+        updateTimerText(remaining);
+      }
+    }, 1000);
+  }
+
+  function updateTimerText(ms){
+    const m = Math.floor(ms/60000);
+    const s = Math.floor((ms%60000)/1000);
+    lockTimerEl.textContent = 'আবার চেষ্টা করার জন্য অপেক্ষা করো: ' + m + ':' + String(s).padStart(2,'0');
+  }
+
+  // Simple verification animation (no camera permissions needed)
+  let verificationTimeout = null;
+  
+  function startVerification(){
+    let progress = 0;
+    const messages = [
+      'Scanning...',
+      'Checking identity...',
+      'Verifying...',
+      'Almost done...'
+    ];
+    let msgIndex = 0;
+    
+    const interval = setInterval(() => {
+      progress += Math.random() * 25;
+      if(progress > 100) progress = 100;
+      
+      document.getElementById('verificationProgress').style.width = progress + '%';
+      
+      if(msgIndex < messages.length && progress >= (msgIndex + 1) * 20){
+        document.getElementById('verificationText').textContent = messages[msgIndex];
+        msgIndex++;
+      }
+      
+      if(progress >= 100){
+        clearInterval(interval);
+        setTimeout(completeVerification, 800);
+      }
+    }, 300);
+    
+    verificationTimeout = interval;
+  }
+  
+  function completeVerification(){
+    document.getElementById('verificationCancelBtn').style.display = 'none';
+    document.getElementById('verificationDoneBtn').style.display = 'inline-block';
+    document.getElementById('verificationText').textContent = 'Verification Complete! ✓';
+  }
+  
+  function completedVerification(){
+    const modal = document.getElementById('cameraModal');
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('lockCard').style.display = 'none';
+    // Reset verification UI for next time
+    document.getElementById('verificationProgress').style.width = '0%';
+    document.getElementById('verificationText').textContent = 'Starting verification...';
+    document.getElementById('verificationCancelBtn').style.display = 'inline-block';
+    document.getElementById('verificationDoneBtn').style.display = 'none';
+    showPage(0);
+  }
+  
+  function cancelVerification(){
+    if(verificationTimeout){
+      clearInterval(verificationTimeout);
+    }
+    const modal = document.getElementById('cameraModal');
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+    document.getElementById('verificationProgress').style.width = '0%';
+    document.getElementById('verificationText').textContent = 'Starting verification...';
+    document.getElementById('verificationCancelBtn').style.display = 'inline-block';
+    document.getElementById('verificationDoneBtn').style.display = 'none';
+  }
+  
+  async function tryUnlock(){
+    if(unlockBtn.disabled) return;
+    const d = parseInt(daySel.value);
+    const m = parseInt(monthSel.value);
+    const y = parseInt(yearSel.value);
+    if(!d || !m || !y){
+      lockErrorEl.textContent = 'দিন, মাস, বছর তিনটাই বেছে নাও।';
+      return;
+    }
+    const attemptHash = await sha256(d + '-' + m + '-' + y);
+    if(attemptHash === CORRECT_HASH){
+      document.getElementById('lockScreen').style.display='none';
+      const modal = document.getElementById('cameraModal');
+      modal.style.display = 'flex';
+      modal.classList.add('show');
+      startVerification();
+    } else {
+      wrongAttempts++;
+      const lock = document.getElementById('lockScreen');
+      lock.classList.add('shake');
+      setTimeout(()=> lock.classList.remove('shake'), 400);
+      if(wrongAttempts >= MAX_ATTEMPTS){
+        startLockout();
+      } else {
+        lockErrorEl.textContent = 'কি হলো বউ? আবার চেষ্টা করো 💛 (' + (MAX_ATTEMPTS - wrongAttempts) + ' বার বাকি)';
+      }
+    }
+  }
+
+  // ---------- sequential page flow ----------
+  const order = ['home','story','letter','justforyou','gallery','reasons','surprise'];
+  let current = 0;
+
+  function showPage(idx){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(order[idx]).classList.add('active');
+    document.getElementById('nextBtn').style.display = (idx === order.length-1) ? 'none' : 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function nextPage(){
+    if(current < order.length-1){
+      current++;
+      showPage(current);
+    }
+  }
+
+  // surprise reveal + confetti + sound
+  function openSurprise(){
+    document.getElementById('revealBox').classList.add('show');
+    playPartyPopper();
+    launchConfetti();
+  }
+
+  function playPartyPopper(){
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+
+      // the initial "pop" - short noise burst with quick pitch drop
+      const popDur = 0.12;
+      const bufferSize = ctx.sampleRate * popDur;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for(let i=0;i<bufferSize;i++){
+        data[i] = (Math.random()*2-1) * (1 - i/bufferSize);
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(1, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.01, now + popDur);
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(3500, now);
+      noise.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      noise.start(now);
+
+      // little "crackle" confetti bits scattering after the pop
+      for(let i=0;i<14;i++){
+        const t = now + 0.05 + Math.random()*0.5;
+        const dur = 0.03 + Math.random()*0.03;
+        const size = Math.floor(ctx.sampleRate*dur);
+        const buf2 = ctx.createBuffer(1, size, ctx.sampleRate);
+        const d2 = buf2.getChannelData(0);
+        for(let j=0;j<size;j++){ d2[j] = (Math.random()*2-1) * (1 - j/size); }
+        const src = ctx.createBufferSource();
+        src.buffer = buf2;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.25 + Math.random()*0.15, t);
+        g.gain.exponentialRampToValueAtTime(0.01, t+dur);
+        const f = ctx.createBiquadFilter();
+        f.type = 'highpass';
+        f.frequency.setValueAtTime(1500 + Math.random()*2500, t);
+        src.connect(f); f.connect(g); g.connect(ctx.destination);
+        src.start(t);
+      }
+    }catch(e){ /* audio not available, silently skip */ }
+  }
+  function launchConfetti(){
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors = ['#ff8fa8','#ff5d82','#ffd1dc','#ffffff','#ffb6c9'];
+    let pieces = Array.from({length:130}, ()=>({
+      x: Math.random()*canvas.width,
+      y: -20 - Math.random()*canvas.height*0.5,
+      r: 3+Math.random()*4,
+      c: colors[Math.floor(Math.random()*colors.length)],
+      vy: 2+Math.random()*3,
+      vx: -1+Math.random()*2,
+      rot: Math.random()*360,
+      vr: -4+Math.random()*8
+    }));
+    let frame=0;
+    function anim(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p=>{
+        p.y += p.vy; p.x += p.vx; p.rot += p.vr;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6);
+        ctx.restore();
+      });
+      frame++;
+      if(frame < 220){ requestAnimationFrame(anim); }
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    }
+    anim();
+  }
+  window.addEventListener('resize', ()=>{
+    const canvas = document.getElementById('confetti-canvas');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('sw.js').catch(()=>{});
+    });
+  }
+</script>
+
+</body>
+</html>
